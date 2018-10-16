@@ -1,0 +1,73 @@
+Short Answer
+Why do programmers use pseudocode?
+Programmers use pseudocode to plan/map out their code before typing it in the syntax of a specific programming language. It helps them develop algorithms.
+
+If you run pseudocode on your computer what would happen?
+Nothing. Pseudocode is used as a brainstorming tool and is not meant to be run by a computer.
+
+Programming Assignment
+Write the following algorithms in pseudocode:
+
+1.Create a function that takes two numbers and prints out the greater number.
+INPUT first number
+INPUT second number
+SUBTRACT second number from first number store the result in difference
+IF the difference is greater than 0 THEN
+	PRINT first number
+ELSE IF the difference is lower than 0 THEN
+	PRINT second number
+ELSE
+	PRINT "The two numbers are equal"
+END IF
+
+2. Create a function that prints out the numbers from 1 to 100.
+INIT counter to 1
+WHILE the counter is lower or equal to 100
+	PRINT counter
+	INCREMENT counter
+ENDWHILE
+
+3. Create a function that searches for a specific entry in a phonebook.
+INPUT phoneNumber
+IF phoneNumber is not a number OR phoneNumber is less than or equal to 0 THEN
+	PRINT "Please input a correct 10 digits phone number"
+ELSE 
+	FOR i = 0 to phoneBook array length
+		IF phoneNumber is equal to phoneBook[i].phone THEN
+			PRINT "This phone number is attributed to " + phoneBook[i].name
+			INCREMENT i
+		ELSE
+		ENDIF
+	ENDFOR
+	PRINT "Unattributed phone number :("
+ENDIF
+
+4. Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+let phoneBook = [
+  {
+    phone: 1111111111,
+    name: "John Smith"
+  },
+  {
+    phone: 2222222222,
+    name: "Jane Doe"
+  },
+  {
+    phone: 3333333333,
+    name: "Bloc Student"
+  }
+];
+
+function phoneSearch(phoneNumber) {
+  if(isNaN(phoneNumber) || phoneNumber <= 0) {
+    console.log("Please input a correct 10 digits phone number");
+  } else {
+    for(var i = 0 ; i < phoneBook.length ; i++) {
+      if(phoneBook[i].phone === phoneNumber) {
+        console.log("This phone number is attributed to " + phoneBook[i].name);
+        return true;
+      }
+    }
+    console.log("Phone number not found!");
+  }
+}
