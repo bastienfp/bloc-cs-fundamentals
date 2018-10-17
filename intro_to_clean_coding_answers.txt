@@ -1,11 +1,11 @@
 Exercises
 1. In your own words, explain what clean code is and why it is important.
 
-Answer: 
+Answer: Clean code is important as it improves readability, understanding and code maintainability for yourself and others when you come back to it.
 
 2. Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
 
-Answer: 
+Answer: Good code is critical in industries such as medical devices, defence systems, machine operating, etc. as it interacts directly with the physical world and can therefore endanger its surrounding if riddled with bugs.
 
 3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 
