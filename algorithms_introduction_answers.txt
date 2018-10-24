@@ -1,0 +1,58 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+Making coffee;
+SET coffeeMakerCoffeeCompartment = 0
+SET coffeeMakerWater = 0
+GET coffee
+GET spoon
+SET coffeeAmount
+IF Temp < coffeeAmount THEN
+	SET coffeeSpoon = spoon + coffee
+	coffeeMakerCoffeeCompartment = coffeeMakerCoffeeCompartment + coffeeSpoon
+	INCREMENT coffeeMakerWater
+	DECREMENT coffeeAmount
+ENDIF
+SET isCoffeeMakerOn = true
+GET coffeeMug
+
+
+Washing dishes;
+
+GET soap
+GET sponge
+INIT soapySponge
+SET isTapOn = true
+WHILE (plates != 0)
+	USE soapySponge to wash plate
+END WHILE
+SET isTapOn = false
+
+
+A choice of your own.
+Brushing teeth
+
+GET toothbrush
+GET toothpaste
+SET toothbrushReady = toothbrush + toothpaste
+SET timer to 2 minutes
+WHILE (timer > 0)
+	USE toothbrushReady to Brush teeth
+END WHILE
+ClEAN toothbrushReady
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+Answer:
+- Amazon distribution algorithm made them successful. The small time-lapse between a customer ordering and receiving its product at the destination of its choice defines Amazon today.
+
+- Crocs shoe design algorithm made them successful and distinctive. The unmistakable design and comfort of their shoes made Crocs renowned worldwide.
+
+- Ikea shopping experience made them globally successful. Their product and stores are uniquely design to enjoy and facilitate shopping for furnitures.
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+Answer:
+An efficient algorithm takes less time to produce a solution.
+An efficient algorithm tests many edge cases to produce a more complete/robust solution.
+An efficient algorithm involves less steps to produce a solution.
