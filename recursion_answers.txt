@@ -1,0 +1,85 @@
+1. Define and compare recursion and iteration.
+
+Answer:
+Iteration is a technique that uses a loop to repeat a process.
+
+Recursion is a technique where a functions calls itself with parameters that are moving closer towards one of the base cases each time. A base case is a condition to a recursive function and provides a solution without any recursive calls.
+
+Both techniques are used to create algorithm. The iteration technique may be sometimes trickier to implement but is usually a better solution for algorithms that pass straight through a data set. On the other hand, the recursion technique may be simpler to write and is well suited when an algorithm's solution can be expressed as the combination of sub-results. However, the time complexity of the recursive form of an algorithm can be worst than its iterative counterpart.
+
+2. Name five algorithms that are commonly implemented by recursion.
+
+Answer:
+- Fibonacci
+- Factorial
+- Euclid's algorithm = Greatest common divisor
+- Rank Search
+- Height of a Binary Tree
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+Answer:
+You should use recursion when the algorithm's solution can be expressed as a combination of sub-result like in Euclid's Algorithm.
+However if the algorithm's solution can require a simple pass through a data set you should privilege the iteration technique like when finding the maximum in an array.
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+
+Answer:
+What is similar is the existence of the base cases. They are expressed differently but they are always present to avoid creating an infinite loop/recursive call.
+
+A major difference is the time complexity though. In most cases, the iterative form is more efficient.
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+Answer:
+function count(array) {
+  if (array === null || array === undefined || array.length === 0) {
+    return 0;
+  } else {
+    let remainingArray = array.slice(1);
+    return 1 + count(remainingArray); 
+  }
+}
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+Answer:
+
+function isPalindrome(word) {
+  if (word === null || word === undefined) {
+    console.log("error");
+  } else if (word.length === 1) {
+    console.log("true");
+    return true;
+  } else {
+    let splitWord = word.split('');
+    let lastCharIndex = splitWord.length-1;
+    if (splitWord[0] === splitWord[lastCharIndex]) {
+      newSplitWord = splitWord.slice(1, lastCharIndex).join('');
+      isPalindrome(newSplitWord);
+      return true
+    } else {
+      console.log("false");
+      return false;
+    }
+  }
+}
+
+isPalindrome("racecar");
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+
+Answer: By providing a link to the keyword "recursion", Google is basically asking the user to call the search algorithm again with the same parameter. It looks recursive but it isn't because the algorithm doesn't really calls itself, it offers the possibility to the user to do so. Also, there doesn't seem to be any base cases.
+
+This can be translated as such:
+
+FUNCTION googleSearch(recursion)
+
+...
+
+CALL googleSearch(recursion)
+RETURN searchResults
+
+...
+
+END FUNCTION
