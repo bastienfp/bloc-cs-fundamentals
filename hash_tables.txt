@@ -1,0 +1,194 @@
+####Questions
+
+>What is a hash table?
+
+Answer: A hash table is a type of data structure that stores each value by linking it to a key, forming key-value pairs.
+
+>What is hashing?
+
+Answer: the process of hashing is the conversion from a string to a numerical index. The key is converted to a specific, fixed-length number, referred to as hash code. Then the hash code is modded with the hash table capacity to return a true index where the value paired with the initial key can be stored.
+
+>How does a hash table store data?
+
+Answer: A Hashtable stores data by association. It uses unique keys (like SSN, ISBN for instance in real life) then it passes those keys into a hashing function that will return an index number based on the key. That index will then hold the value originally associated with the key.
+
+>How are hash tables and objects different?
+
+Answer: Even though they can be interchangeably in certain programming languages, Objects and Hash Tables are fundamentally meant to be handling different types of data. If your data is a static number of distinct values of different types, then an object is the optimal choice. Use a hash table when your data contains a variable number of consistently formatted values, each with an identifier.
+
+>Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+A list of pets and their unique names. => Hash Table
+The name, age, and the birthday of your best friend. => Object
+The name and location of every company in a given city. => Hash Table
+All of the books checked out from a library by a particular individual. => Hash Table
+The primary and secondary phone numbers for a contact. => Object
+
+
+####Programming Assignments
+>Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
+
+````js
+class ClientList{
+  constructor(){
+    this.database = [];
+    this.databaseCapacity = 1000;
+  }
+  
+  hashFunction(key) {
+    let hash = 0;
+    for(var i = 0; i < key.length; i++){
+      hash += key.charCodeAt(i);
+    }
+    return hash % this.databaseCapacity;  
+  }
+  
+  add(customerName, customerAddress, customerPhone){
+    let index = this.hashFunction(customerPhone.toString());
+    
+    if (!this.database[index]) {
+      this.database[index] = [customerName, customerAddress, customerPhone];
+    }
+  }
+  
+  get(customerPhone){
+    let index = this.hashFunction(customerPhone.toString());
+    if(!this.database[index]){
+      return "Customer does not exist or wrong phone number";
+    } else {
+          return this.database[index][0] + ", " + this.database[index][1] + ", " + this.database[index][2];
+    }
+  }
+}
+
+let customers = new ClientList();
+customers.add("Adam", "123 Whatnot St", 1111111111);
+customers.add("Eve", "456 Somewhere Ln", 2222222222);
+customers.add("Bob", "789 Here Dr", 3333333333);
+
+console.log(customers.get(1111111111));
+console.log(customers.get(2222222222)); 
+console.log(customers.get(3333333333)); 
+console.log(customers.get(5555555555));
+````
+
+>Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+
+````js
+class Inventory{
+  constructor(){
+    this.database = [];
+    this.databaseCapacity = 1000;
+  }
+  
+  hashFunction(key) {
+    let hash = 0;
+    for(var i = 0; i < key.length; i++){
+      hash += key.charCodeAt(i);
+    }
+    return hash % this.databaseCapacity;  
+  }
+  
+  add(itemName, itemQuantity, itemSku){
+    let index = this.hashFunction(itemSku.toString());
+    
+    if (!this.database[index]) {
+      this.database[index] = [itemName, itemQuantity, itemSku];
+    }
+  }
+  
+  get(itemSku){
+    let index = this.hashFunction(itemSku.toString());
+    if(!this.database[index]){
+      return "Item does not exist or wrong item SKU";
+    } else {
+          return this.database[index][0] + ", " + this.database[index][1] + ", " + this.database[index][2];
+    }
+  }
+}
+
+let items = new Inventory();
+items.add("Shoes", 100, 1234);
+items.add("Hats", 200, 5678);
+items.add("T-shirts", 300, 9123);
+
+console.log(items.get(1234));
+console.log(items.get(5678)); 
+console.log(items.get(9123)); 
+console.log(items.get(5555));
+
+````
+
+>Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+
+````js
+class Newspaper {
+    constructor(){
+      this.database = [];
+      this.databaseCapacity = 1000;
+    }
+
+    hashFunction(key) {
+      let hash = 0;
+      for (var i = 0; i < key.length; i++) {
+        hash = hash + key.charCodeAt(i);
+      }
+      return hash % this.databaseCapacity;
+    }
+
+    add(name, publisher, date){
+      let publisherIndex = this.hashFunction(publisher);
+      let dateIndex = this.hashFunction(date);
+
+      if(!this.database[publisherIndex]){
+        this.database[publisherIndex] = [name, publisher, date];
+        return;
+      } else if(!this.database[dateIndex]){
+        this.database[dateIndex] = [name, publisher, date];
+      } 
+    }
+
+    get(){
+      if(arguments.length === 0){
+        return console.log("Not enough arguments. Use either the publisher's name or the publication date to search or use both.");
+        
+      } else if(arguments.length === 1){
+        let a = arguments[0];
+        let aIndex = this.hashFunction(a);
+          
+        if(!this.database[aIndex]){
+          return console.log("Not found");  
+        } else {
+          let result = this.database[aIndex];
+          return console.log(result);
+        }
+        
+      } else if(arguments.length === 2){
+        let p = arguments[0];
+        let d = arguments[1];
+        let pIndex = this.hashFunction(p);
+        let dIndex = this.hashFunction(d);
+          
+        if(!this.database[pIndex] && !this.database[dIndex]){
+          return console.log("Not found");
+        } else if(!this.database[pIndex]){
+          let result = this.database[dIndex];
+          return console.log(result);
+        } else {
+          let result = this.database[pIndex];
+          return console.log(result);
+        }  
+      } else if(arguments.length > 2){
+        return console.log("Too many arguments. Use either the publisher's name or the publication date to search or use both.");
+      }
+    }
+}
+
+let newCopy = new Newspaper();
+
+newCopy.add('bastien test', 'bloc', '11/01/2019');
+console.log(newCopy);
+newCopy.get('bloc');
+newCopy.get('bloc', '', '');
+newCopy.get();
+````
