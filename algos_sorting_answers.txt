@@ -1,0 +1,64 @@
+1. Write pseudocode for bubble sort.
+
+Answer:
+FUNCTION bubbleSort(collection)
+
+ SET swapped to FALSE
+ WHILE swapped is FALSE
+
+  FOR i = FIRST INDEX of collection to LAST INDEX of collection - 1
+   
+   IF collection[i] > collection[i+1] THEN
+    SET tmp to collection[i]
+    SET collection[i] to collection[i+1]
+    SET collection[i+1] to tmp
+    SET swapped to TRUE
+   END IF
+
+  END FOR
+
+ RETURN collection
+
+END FUNCTION
+
+
+2. Write pseudocode for quicksort.
+
+Answer:
+FUNCTION quickSort(collection, low, high)
+ IF low < high THEN
+  SET pivot INDEX to partition with collection, low, high
+  CALL quickSort WITH FIRST INDEX of collection to pivot INDEX - 1
+  CALL quickSort WITH pivot INDEX + 1 to LAST INDEX of collection
+ END IF
+END FUNCTION
+
+FUNCTION partition(collection, low, high)
+ SET pivot to collection[low]
+ SET leftwall to low
+ 
+ FOR i = FIRST INDEX of collection + 1 to  LAST INDEX of collection
+  IF collection[i] < pivot THEN
+   SET leftwall = leftwall + 1
+   SWAP collection[i] WITH collection[leftwall]
+  END IF
+ SWAP collection[low] WITH collection[leftwall]
+ RETURN leftwall
+END FUNCTION
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+Answer:
+Merge Sort and Quick Sort have an average time complexity of O(n log n) vs O(n^2) for Selection, Insertion and Bubble sort due to their divide and conquer approach which makes them more efficient.
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+Answer:
+1. We start with an unsorted collection;
+2. We create an array with a fixed number of empty buckets (bins);
+3. We go over the original collection and place each item of the original collection in the empty buckets based on specific criteria (single-digits go in the first buckets, first decade in the second bucket, second decade in the third bucket, etc.);
+4. We sort the non-empty buckets (either using another sorting algorithm or using bucket sort recursively); and
+5. We then go through each bucket in order and empty them back into the original collection. Since each bucket has been sorted, we obtain a sorted collection.
+
+Bucket sort works best when the input is more or less uniformly distributed over a range.
