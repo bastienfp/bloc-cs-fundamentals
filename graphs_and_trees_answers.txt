@@ -1,0 +1,98 @@
+Short Questions:
+
+1. What is a binary tree and what makes it unique to other trees?
+
+Answer: A binary tree is a data structure in which each node may point to up to but no more than 2 child nodes, a left child and a right child.
+
+
+2. What is a heuristic?
+
+Answer: This is a "best" guess performed by a system to solve a problem sooner/faster while sacrificing accuracy.
+
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+Answer: 
+
+
+4. What is the difference between a depth-first search and a breadth-first search?
+
+Answer: The main difference between these two search methods is how they navigate down a tree. DFS starts at the root and explores as far as possible along each branch before backtracking. Conversely, BFS starts at the root and explores all neighboring nodes before moving to the next level neighbors.
+
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+Answer: 
+- The graph has ambiguous edges connecting nodes meaning edges don't have a defined start or end node; 
+- The graph doesn't form loops; and
+- The edges the graph do not assign a cost of travel between nodes.
+
+
+6. What kind of graph is a binary search tree?
+
+Answer: undirected, a-cyclic, unweighted graph
+
+
+Programming Questions:
+
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+
+Answer:
+
+findNumber = (binarySearchTree, targetNumber) => {
+  let currentNode = binarySearchTree.root;
+  while(currentNode != null){
+    if(targetNumber === currentNode.data){
+      return "The value " + currentNode.data + " exists in the tree";
+    } else if(targetNumber < currentNode.data){
+      currentNode = currentNode.left;
+    } else{
+      currentNode = currentNode.right;
+    }
+  }
+  return "The value " + targetNumber + " does not exist in the tree.";
+}
+
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+
+Answer:
+
+findDistanceFromAncestor = (currentNode, x) => {
+  if(currentNode.data === x){
+    return 0
+  } else if(x > currentNode.data){
+    return 1 + findDistanceFromAncestor(currentNode.right, x);
+  }
+  return 1 + findDistanceFromAncestor(currentNode.left, x);
+}
+
+findDistanceBetween2 = (currentNode, n1, n2) => {
+  if(currentNode === null){
+    return 0;
+  } else if(n1 > currentNode.data && n2 > currentNode.data){
+    return findDistanceBetween2(currentNode.right, n1, n2);
+  } else if(n1 < currentNode.data && n2 < currentNode.data){
+    return findDistanceBetween2(currentNode.left, n1, n2);
+  } else if(n1 >= currentNode.data && n2 <= currentNode.data){
+    return findDistanceFromAncestor(currentNode, n1) + findDistanceFromAncestor(currentNode, n2);
+  }
+  return 0;
+}
+
+findDistance = (binarySearchTree, n1, n2) => {
+  if(n1 === n2){
+  return findDistanceFromAncestor(binarySearchTree.root, n1);
+  } else if(n1 > n2){
+  return findDistanceBetween2(binarySearchTree.root, n1, n2);
+  }
+  return findDistanceBetween2(binarySearchTree.root, n2, n1);
+}
+
+
