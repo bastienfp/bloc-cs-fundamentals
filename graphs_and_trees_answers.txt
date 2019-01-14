@@ -40,7 +40,55 @@ Programming Questions:
 Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
 
 
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+
 Answer:
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+  
+  insertNode(val){
+    let node = {
+      data: val,
+      left: null,
+      right: null
+    };
+        
+    let currentNode;
+       
+    if(!this.root){
+      this.root = node;
+    } else{
+      currentNode = this.root;
+      while(currentNode){
+        if(val < currentNode.data){
+          if(!currentNode.left){
+            currentNode.left = node;
+            break;
+          } else{
+            currentNode = currentNode.left;
+          }
+        } else if(val > currentNode.data){
+          if(!currentNode.right){
+            currentNode.right = node;
+            break;
+          } else{
+            currentNode = currentNode.right;
+          }
+        } else{
+          console.log("Value ignored because it already exists.");
+          break;
+        }
+      }
+    }
+    
+  }
+}
 
 findNumber = (binarySearchTree, targetNumber) => {
   let currentNode = binarySearchTree.root;
@@ -55,14 +103,6 @@ findNumber = (binarySearchTree, targetNumber) => {
   }
   return "The value " + targetNumber + " does not exist in the tree.";
 }
-
-
-2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
-
-Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
-
-
-Answer:
 
 findDistanceFromAncestor = (currentNode, x) => {
   if(currentNode.data === x){
@@ -94,5 +134,23 @@ findDistance = (binarySearchTree, n1, n2) => {
   }
   return findDistanceBetween2(binarySearchTree.root, n2, n1);
 }
+
+
+let treeTest = new BinarySearchTree();
+
+treeTest.insertNode(8);
+treeTest.insertNode(3);
+treeTest.insertNode(10);
+treeTest.insertNode(1);
+treeTest.insertNode(6);
+treeTest.insertNode(14);
+treeTest.insertNode(4);
+treeTest.insertNode(7);
+treeTest.insertNode(13);
+
+console.log(findNumber(treeTest,10));
+console.log(findNumber(treeTest,23));
+
+console.log(findDistance(treeTest, 4, 10));
 
 
